@@ -1,0 +1,30 @@
+{
+  "manifest": {
+    "publishingInformation": {
+      "locales": {
+        "ja-JP": {
+          "summary": "5回のなぜで問題の原因を分析しましょう",
+          "examplePhrases": [
+            "アレクサ、なぜなぜ分析を始めて",
+            "アレクサ、なぜなぜ分析を開始して"
+          ],
+          "name": "なぜなぜ分析",
+          "description": "何か問題を抱えていますか？Alexaが相談に乗ってくれます。5回のなぜで問題を深掘りし、根本原因を分析しましょう",
+          "keywords": ["問題解決", "相談", "分析", "悩み", "5回のなぜ", "カイゼン"]
+        }
+      },
+      "isAvailableWorldwide": false,
+      "testingInstructions": "this skill is Japanese only for now.",
+      "category": "SELF_IMPROVEMENT",
+      "distributionCountries": []
+    },
+    "apis": {
+      "custom": {
+        "endpoint": {
+          "sourceDir": "lambda/custom"
+        }
+      }
+    },
+    "manifestVersion": "1.0"
+  }
+}
