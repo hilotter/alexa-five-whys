@@ -1,0 +1,52 @@
+{
+  "interactionModel": {
+    "languageModel": {
+      "invocationName": "five whys",
+      "types": [
+
+      ],
+      "intents": [
+        {
+          "name": "AMAZON.CancelIntent",
+          "samples": [
+
+          ]
+        },
+        {
+          "name": "AMAZON.HelpIntent",
+          "samples": [
+
+          ]
+        },
+        {
+          "name": "AMAZON.StopIntent",
+          "samples": [
+
+          ]
+        },
+        {
+          "name": "WhyIntent",
+          "slots": [{
+            "name": "text",
+            "type": "any"
+          }],
+          "samples": [
+            "{text}"
+          ]
+        }
+      ],
+      "types": [
+        {
+          "name": "any",
+          "values": [
+            {
+              "name": {
+                "value": "any"
+              }
+            }
+          ]
+        }
+      ] 
+    }
+  }
+}
