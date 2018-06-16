@@ -11,7 +11,7 @@ module.exports = {
       lng: handlerInput.requestEnvelope.request.locale,
       overloadTranslationOptionHandler: sprintf.overloadTranslationOptionHandler,
       resources: languageStrings,
-      returnObjects: true
+      returnObjects: true,
     });
 
     const attributes = handlerInput.attributesManager.getRequestAttributes();

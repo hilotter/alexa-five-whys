@@ -6,22 +6,22 @@ const LocalizationInterceptor = require('./localization_interceptor');
 
 const readQuestionCounter = (handlerInput) => {
   const attributes = handlerInput.attributesManager.getSessionAttributes();
-   if(!attributes.counter){ 
-      attributes.counter = 1;
+  if (!attributes.counter) {
+    attributes.counter = 1;
   }
-  const counter = attributes.counter;
+  const { counter } = attributes;
 
-  attributes.counter++;
+  attributes.counter += 1;
   handlerInput.attributesManager.setSessionAttributes(attributes);
 
   return counter;
-}
+};
 
 const resetQuestionCounter = (handlerInput) => {
   const attributes = handlerInput.attributesManager.getSessionAttributes();
   attributes.counter = null;
   handlerInput.attributesManager.setSessionAttributes(attributes);
-}
+};
 
 const LaunchRequestHandler = {
   canHandle(handlerInput) {
@@ -45,11 +45,10 @@ const WhyIntentHandler = {
   },
   handle(handlerInput) {
     const counter = readQuestionCounter(handlerInput);
-    const text = handlerInput.requestEnvelope.request.intent.slots['text'].value;
     const requestAttributes = handlerInput.attributesManager.getRequestAttributes();
     let speechText;
 
-    if (counter == 6) {
+    if (counter === 6) {
       speechText = requestAttributes.t('ANSWER_NEXT');
     } else {
       speechText = requestAttributes.t('ANSWER');
@@ -131,7 +130,7 @@ exports.handler = skillBuilder
     WhyIntentHandler,
     HelpIntentHandler,
     CancelAndStopIntentHandler,
-    SessionEndedRequestHandler
+    SessionEndedRequestHandler,
   )
   .addRequestInterceptors(LocalizationInterceptor)
   .addErrorHandlers(ErrorHandler)
