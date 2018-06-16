@@ -10,11 +10,37 @@
           ],
           "name": "なぜなぜ分析",
           "description": "何か問題を抱えていますか？Alexaが相談に乗ってくれます。5回のなぜで問題を深掘りし、根本原因を分析しましょう",
-          "keywords": ["問題解決", "相談", "分析", "悩み", "5回のなぜ", "カイゼン"]
+          "keywords": ["問題解決", "相談", "分析", "悩み", "5回のなぜ", "カイゼン"],
+          "smallIconUri": "https://s3-ap-northeast-1.amazonaws.com/alexa-five-whys/icon/icon_108px.png",
+          "largeIconUri": "https://s3-ap-northeast-1.amazonaws.com/alexa-five-whys/icon/icon_512px.png"
+        },
+        "en-US": {
+          "summary": "Let's start '5 Whys' with your alexa.",
+          "examplePhrases": [
+            "Alexa open 5 Whys",
+            "Alexa start 5 Whys"
+          ],
+          "name": "5 Whys",
+          "description": "Do you have any problems? Let's start '5 Whys' with your alexa.",
+          "keywords": ["kaizen", "problem", "trouble", "five whys"],
+          "smallIconUri": "https://s3-ap-northeast-1.amazonaws.com/alexa-five-whys/icon/icon_108px.png",
+          "largeIconUri": "https://s3-ap-northeast-1.amazonaws.com/alexa-five-whys/icon/icon_512px.png"
+        },
+        "en-GB": {
+          "summary": "Let's start '5 Whys' with your alexa.",
+          "examplePhrases": [
+            "Alexa open 5 Whys",
+            "Alexa start 5 Whys"
+          ],
+          "name": "5 Whys",
+          "description": "Do you have any problems? Let's start '5 Whys' with your alexa.",
+          "keywords": ["kaizen", "problem", "trouble", "five whys"],
+          "smallIconUri": "https://s3-ap-northeast-1.amazonaws.com/alexa-five-whys/icon/icon_108px.png",
+          "largeIconUri": "https://s3-ap-northeast-1.amazonaws.com/alexa-five-whys/icon/icon_512px.png"
         }
       },
       "isAvailableWorldwide": false,
-      "testingInstructions": "this skill is Japanese only for now.",
+      "testingInstructions": "this skill is able to use Japanese and English.",
       "category": "SELF_IMPROVEMENT",
       "distributionCountries": []
     },
