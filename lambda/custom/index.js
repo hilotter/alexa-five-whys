@@ -2,32 +2,34 @@
 /* eslint-disable  no-console */
 
 const Alexa = require('ask-sdk-core');
+const LocalizationInterceptor = require('./localization_interceptor');
 
 const readQuestionCounter = (handlerInput) => {
   const attributes = handlerInput.attributesManager.getSessionAttributes();
-   if(!attributes.counter){ 
-      attributes.counter = 1;
+  if (!attributes.counter) {
+    attributes.counter = 1;
   }
-  const counter = attributes.counter;
+  const { counter } = attributes;
 
-  attributes.counter++;
+  attributes.counter += 1;
   handlerInput.attributesManager.setSessionAttributes(attributes);
 
   return counter;
-}
+};
 
 const resetQuestionCounter = (handlerInput) => {
   const attributes = handlerInput.attributesManager.getSessionAttributes();
   attributes.counter = null;
   handlerInput.attributesManager.setSessionAttributes(attributes);
-}
+};
 
 const LaunchRequestHandler = {
   canHandle(handlerInput) {
     return handlerInput.requestEnvelope.request.type === 'LaunchRequest';
   },
   handle(handlerInput) {
-    const speechText = '5回のなぜへようこそ。相談したい内容を話してください。';
+    const requestAttributes = handlerInput.attributesManager.getRequestAttributes();
+    const speechText = requestAttributes.t('WELCOME');
 
     return handlerInput.responseBuilder
       .speak(speechText)
@@ -43,13 +45,13 @@ const WhyIntentHandler = {
   },
   handle(handlerInput) {
     const counter = readQuestionCounter(handlerInput);
-    const text = handlerInput.requestEnvelope.request.intent.slots['text'].value;
+    const requestAttributes = handlerInput.attributesManager.getRequestAttributes();
     let speechText;
 
-    if (counter == 6) {
-      speechText = '問題の本当の原因にたどり着くことはできましたか？終了する場合は、「ストップ」と言ってください。続ける場合は、そのまま分析を続けてください。';
+    if (counter === 6) {
+      speechText = requestAttributes.t('ANSWER_NEXT');
     } else {
-      speechText = 'なぜですか？';
+      speechText = requestAttributes.t('ANSWER');
     }
 
     return handlerInput.responseBuilder
@@ -65,7 +67,8 @@ const HelpIntentHandler = {
       && handlerInput.requestEnvelope.request.intent.name === 'AMAZON.HelpIntent';
   },
   handle(handlerInput) {
-    const speechText = '分析したい問題を私に相談してみてください';
+    const requestAttributes = handlerInput.attributesManager.getRequestAttributes();
+    const speechText = requestAttributes.t('HELP');
 
     return handlerInput.responseBuilder
       .speak(speechText)
@@ -81,7 +84,8 @@ const CancelAndStopIntentHandler = {
         || handlerInput.requestEnvelope.request.intent.name === 'AMAZON.StopIntent');
   },
   handle(handlerInput) {
-    const speechText = 'またいつでも相談してください！';
+    const requestAttributes = handlerInput.attributesManager.getRequestAttributes();
+    const speechText = requestAttributes.t('STOP');
 
     return handlerInput.responseBuilder
       .speak(speechText)
@@ -108,9 +112,12 @@ const ErrorHandler = {
   handle(handlerInput, error) {
     console.log(`Error handled: ${error.message}`);
 
+    const requestAttributes = handlerInput.attributesManager.getRequestAttributes();
+    const speechText = requestAttributes.t('ERROR');
+
     return handlerInput.responseBuilder
-      .speak('すみません。内容が理解できませんでした。もう一度お願いします。')
-      .reprompt('すみません。内容が理解できませんでした。もう一度お願いします。')
+      .speak(speechText)
+      .reprompt(speechText)
       .getResponse();
   },
 };
@@ -123,7 +130,8 @@ exports.handler = skillBuilder
     WhyIntentHandler,
     HelpIntentHandler,
     CancelAndStopIntentHandler,
-    SessionEndedRequestHandler
+    SessionEndedRequestHandler,
   )
+  .addRequestInterceptors(LocalizationInterceptor)
   .addErrorHandlers(ErrorHandler)
   .lambda();
